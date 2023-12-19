@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBSYSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DBSYSEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Roles" EntityType="DBSYSModel.Role" />
+    <EntitySet Name="SALESsolds" EntityType="DBSYSModel.SALESsold" />
+    <EntitySet Name="sysdiagrams" EntityType="DBSYSModel.sysdiagram" />
+    <EntitySet Name="UserAccounts" EntityType="DBSYSModel.UserAccount" />
+    <EntitySet Name="UserInformations" EntityType="DBSYSModel.UserInformation" />
+    <EntitySet Name="vw_addrole" EntityType="DBSYSModel.vw_addrole" />
+    <EntitySet Name="vw_Sales" EntityType="DBSYSModel.vw_Sales" />
+    <AssociationSet Name="FK_SALESsold_SALESsold1" Association="DBSYSModel.FK_SALESsold_SALESsold1">
+      <End Role="SALESsold" EntitySet="SALESsolds" />
+      <End Role="SALESsold1" EntitySet="SALESsolds" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserInfor__userI__4D94879B" Association="DBSYSModel.FK__UserInfor__userI__4D94879B">
+      <End Role="UserAccount" EntitySet="UserAccounts" />
+      <End Role="UserInformation" EntitySet="UserInformations" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="roleId" />
+    </Key>
+    <Property Name="roleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="roleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="roleDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="SALESsold">
+    <Key>
+      <PropertyRef Name="SaleID" />
+    </Key>
+    <Property Name="SaleID" Type="Int32" Nullable="false" />
+    <Property Name="ItemID" Type="Int32" />
+    <Property Name="QuantityChocolate" Type="Int32" />
+    <Property Name="QuantityStrawberry" Type="Int32" />
+    <Property Name="QuantityBerry" Type="Int32" />
+    <Property Name="QuantityMelon" Type="Int32" />
+    <Property Name="QuantityVanilla" Type="Int32" />
+    <Property Name="QuantityCherry" Type="Int32" />
+    <Property Name="QuantityCreamy" Type="Int32" />
+    <Property Name="QuantityMacha" Type="Int32" />
+    <Property Name="ModeOfPayment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TotalCost" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ChangeAmount" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="SALESsold1" Relationship="DBSYSModel.FK_SALESsold_SALESsold1" FromRole="SALESsold" ToRole="SALESsold1" />
+    <NavigationProperty Name="SALESsold2" Relationship="DBSYSModel.FK_SALESsold_SALESsold1" FromRole="SALESsold1" ToRole="SALESsold" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="UserAccount">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="userPassword" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="userStatus" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="roleId" Type="Int32" />
+    <NavigationProperty Name="UserInformations" Relationship="DBSYSModel.FK__UserInfor__userI__4D94879B" FromRole="UserAccount" ToRole="UserInformation" />
+  </EntityType>
+  <EntityType Name="UserInformation">
+    <Key>
+      <PropertyRef Name="userInfoId" />
+    </Key>
+    <Property Name="userInfoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userInfLname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="userInfFname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="userId" Type="Int32" />
+    <NavigationProperty Name="UserAccount" Relationship="DBSYSModel.FK__UserInfor__userI__4D94879B" FromRole="UserInformation" ToRole="UserAccount" />
+  </EntityType>
+  <EntityType Name="vw_addrole">
+    <Key>
+      <PropertyRef Name="userName" />
+    </Key>
+    <Property Name="roleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="userName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="vw_Sales">
+    <Key>
+      <PropertyRef Name="SaleID" />
+    </Key>
+    <Property Name="SaleID" Type="Int32" Nullable="false" />
+    <Property Name="ItemID" Type="Int32" />
+    <Property Name="QuantityChocolate" Type="Int32" />
+    <Property Name="QuantityStrawberry" Type="Int32" />
+    <Property Name="QuantityBerry" Type="Int32" />
+    <Property Name="QuantityMelon" Type="Int32" />
+    <Property Name="QuantityVanilla" Type="Int32" />
+    <Property Name="QuantityCherry" Type="Int32" />
+    <Property Name="QuantityCreamy" Type="Int32" />
+    <Property Name="QuantityMacha" Type="Int32" />
+    <Property Name="ModeOfPayment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TotalCost" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ChangeAmount" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <Association Name="FK_SALESsold_SALESsold1">
+    <End Type="DBSYSModel.SALESsold" Role="SALESsold" Multiplicity="0..1" />
+    <End Type="DBSYSModel.SALESsold" Role="SALESsold1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SALESsold">
+        <PropertyRef Name="SaleID" />
+      </Principal>
+      <Dependent Role="SALESsold1">
+        <PropertyRef Name="ItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserInfor__userI__4D94879B">
+    <End Type="DBSYSModel.UserAccount" Role="UserAccount" Multiplicity="0..1" />
+    <End Type="DBSYSModel.UserInformation" Role="UserInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserAccount">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="UserInformation">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
